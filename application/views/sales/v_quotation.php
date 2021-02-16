@@ -46,6 +46,7 @@
                     <th field="usr_upd" width="50" align="left">Usr Upd</th>
                     <th field="ispost" width="60" align="center">Posted</th>
                     <th field="iscancel" width="60" align="center">Cancel</th>
+                    <th field="status" width="60" align="center">status</th>
                 </tr>
             </thead>
         </table>

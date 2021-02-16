@@ -54,7 +54,8 @@ class Quotation_model extends CI_Model
                         a.iscancel,
                         a.pterm,
                         a.id_cat_project,
-                        cp.descriptions as cpdescriptions
+                        cp.descriptions as cpdescriptions,
+                        a.status
                     FROM sales.quotation a
                     LEFT JOIN master.mcat_project cp ON cp.id_cat_project=a.id_cat_project
                     WHERE a.isdelete='0'
@@ -203,7 +204,7 @@ class Quotation_model extends CI_Model
             sub_total, vat_num, total, margin_psn,
             sub_total_quot, vat_num_quot, total_quot,
             pterm, usr_ins, usr_upd,
-            ispost,iscancel, isdelete, iscLosed)
+            ispost,iscancel, isdelete, iscLosed, status)
          VALUES (
            " . $id . ", '" . $datmaster['idtrans'] . "','" . $no_trans . "', to_timestamp('" . $datmaster['dt_qt'] . "','dd-mm-yyyy'),
            null, null, '" . $datmaster['id_cat_project'] . "',
@@ -213,7 +214,7 @@ class Quotation_model extends CI_Model
            " . $datmaster['sub_total'] . ", " . $datmaster['vat_num'] . ", " . $datmaster['total'] . ", " . $datmaster['margin_psn'] . ",
            " . $datmaster['sub_total_quot'] . ", " . $datmaster['vat_num_quot'] . ", " . $datmaster['total_quot'] . ",
            '" . $datmaster['pterm'] . "','" .  $this->session->userdata('username') . "', '" .  $this->session->userdata('username') . "', 
-          '0','0','0','0');";
+          '0','0','0','0','proses');";
 
 
         //   var_dump($qrM);
