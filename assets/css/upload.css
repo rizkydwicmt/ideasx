@@ -1,0 +1,15 @@
+/* Container */
+
+
+/* Preview */
+.upreview {
+	width: 150px;
+	height: 150px;
+	border: 1px solid black;
+	margin: 0 auto;
+	background: lightblue;
+}
+
+.upreview img {
+	display: none;
+}
