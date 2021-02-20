@@ -281,6 +281,39 @@
         }
     }
 
+    function updateData($status) {
+        var row = $('#dgMain').datagrid('getSelected');
+        if (row) {
+            if (row.ispost == '1') {
+                Swal.fire(
+                    'Data has been Posted !!!'
+                )
+                return false;
+            }
+            //alert(row.kd_rekanan);
+            var result = confirm("Are you sure to update?");
+            if (result) {
+                // update logic goes here
+                //alert(row.kd_rekanan);
+                $.ajax({
+                    url: "<?= base_url(); ?>sales/Quotation/destroyQuot",
+                    method: "POST",
+                    dataType: 'json',
+                    data: {
+                        id: row.id_qt
+                    },
+                    error: function() {
+                        document.getElementById("delError").click(); // Click on the checkbox
+                    },
+                    success: function(data) {
+                        $('#dgMain').datagrid('reload'); // reload the user data
+                        document.getElementById("delSuccess").click(); // Click on the checkbox;
+                    }
+                });
+            }
+        }
+    }
+
     $(function() {
         $('#dgMain').datagrid({
             view: detailview,

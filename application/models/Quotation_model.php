@@ -171,13 +171,14 @@ class Quotation_model extends CI_Model
 
     public function saveQuot($m)
     {
+        // var_dump($_post);die();
          //var_dump($this->input->post('info', true));
          //die;
         $datmaster = $this->input->post('info', true)[0]['master'][0];
         $datdetail = $this->input->post('info', true)[0]['detail'];
         $datremarks = $this->input->post('info', true)[0]['dremarks'];
 
-        // var_dump($datmaster);
+        // var_dump($datdetail);
         // die;
 
         $vmm = trim(substr($datmaster['dt_qt'], 3, 2));
