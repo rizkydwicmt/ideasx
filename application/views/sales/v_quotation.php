@@ -57,6 +57,8 @@
             <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onClick="removeData()">Destroy</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" plain="true" onclick="javascript:$('#dgMain').datagrid('reload'); ">Refresh</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-print" plain="true" onClick="printData()">Print</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" plain="true" onClick="updateData('diterima')">Approved</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" plain="true" onClick="updateData('ditolak')">Tolak</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-form" plain="true" onClick="revisionData()">Revision</a>
         </div>
 
@@ -281,10 +283,10 @@
         }
     }
 
-    function updateData($status) {
+    function updateData(status) {
         var row = $('#dgMain').datagrid('getSelected');
         if (row) {
-            if (row.ispost == '1') {
+            if (row.status !== 'proses') {
                 Swal.fire(
                     'Data has been Posted !!!'
                 )
@@ -296,18 +298,19 @@
                 // update logic goes here
                 //alert(row.kd_rekanan);
                 $.ajax({
-                    url: "<?= base_url(); ?>sales/Quotation/destroyQuot",
+                    url: "<?= base_url(); ?>sales/Quotation/updateStatusQuot",
                     method: "POST",
                     dataType: 'json',
                     data: {
-                        id: row.id_qt
+                        id: row.id_qt,
+                        status: status
                     },
                     error: function() {
-                        document.getElementById("delError").click(); // Click on the checkbox
+                        document.getElementById("editError").click(); // Click on the checkbox
                     },
                     success: function(data) {
                         $('#dgMain').datagrid('reload'); // reload the user data
-                        document.getElementById("delSuccess").click(); // Click on the checkbox;
+                        document.getElementById("editSuccess").click(); // Click on the checkbox;
                     }
                 });
             }

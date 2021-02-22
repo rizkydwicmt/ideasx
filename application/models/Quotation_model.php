@@ -317,6 +317,25 @@ class Quotation_model extends CI_Model
         // }
     }
 
+    public function editStatusQuot(){
+        $id = $this->input->post('id', true);
+        $status = $this->input->post('status', true);
+        $qrM = "UPDATE sales.quotation
+                SET status = '$status' 
+                WHERE id_qt = $id";
+        
+        $this->db->trans_begin();
+        $this->db->query($qrM);
+
+        if ($this->db->trans_status() === FALSE) {
+            $this->db->trans_rollback();
+        } else {
+            $this->db->trans_commit();
+        }
+
+        $hasil = $this->db->affected_rows();
+        return $hasil;
+    }
 
     public function editQuot()
     {

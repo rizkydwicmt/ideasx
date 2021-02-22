@@ -274,6 +274,17 @@ class Quotation extends CI_Controller
         }
     }
 
+    public function updateStatusQuot()
+    {
+        $input = $this->Quotation_model->editStatusQuot();
+        if ($input) {
+            echo json_encode(['success' => $input]);
+        } else {
+            echo json_encode(['Msg' => 'Some Error occured!.']);
+        }
+    }
+
+
 
     public function destroyQuot()
     {
